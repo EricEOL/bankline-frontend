@@ -2,7 +2,7 @@ import { Injectable, Type } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-type Movement = {
+export type Movement = {
   id: string,
   createdAt: string,
   description: string,
@@ -20,7 +20,11 @@ export class MovementService {
 
   constructor(private http: HttpClient) { }
 
-  all(): Observable<Movement> {
-    return this.http.get<Movement>(`${this.baseUrl}/movements`);
+  all(holderId: number): Observable<Movement[]> {
+    return this.http.get<Movement[]>(`${this.baseUrl}/movements/${holderId}`);
+  }
+
+  create(movement: Movement): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/movements`, movement);
   }
 }

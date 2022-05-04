@@ -1,5 +1,18 @@
 <div class="container">
-  <a routerLink="/movement-new" class="btn btn-outline-primary btn-sm">Nova Movimentação</a>
+
+  <div class="jumbotron">
+    <h1 class="display-6">Movimentações</h1>
+    <p class="lead-1">Listagem das movimentações por correntista</p>
+    <hr class="my-2">
+    <div class="input-group">
+      <select  id="iCorrentista" [(ngModel)]="holder" class="form-select">
+        <option *ngFor="let holder of holders" [ngValue]="holder.id" >{{holder.cpf}}-{{holder.name}}</option>
+      </select>
+    <button class="btn btn-outline-secondary me-md-2 btn-sm" type="button" (click)="all()">Buscar</button>
+    <a class="btn btn-outline-primary btn-sm" routerLink="/movement-new">Nova Movimentação</a>
+    <a class="btn btn-outline-primary btn-sm" routerLink="/holders">Correntistas</a>
+  </div>
+
   <table class="table table-striped">
     <thead>
       <tr>

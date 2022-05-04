@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MovementService } from '../../services/movement.service';
+import { Movement, MovementService } from '../../services/movement.service';
+import { Holder, HoldersService } from 'src/app/services/holders.service';
 
 @Component({
   selector: 'app-movement-list',
@@ -8,21 +9,37 @@ import { MovementService } from '../../services/movement.service';
 })
 export class MovementListComponent implements OnInit {
 
-  movements: any;
+  holders: Holder[] = [];
 
-  constructor(private movementService: MovementService) { }
+  holder: any;
+
+  movements: Movement[] = [];
+
+  constructor
+  (
+    private movementService: MovementService,
+    private holderService: HoldersService
+  ) { }
 
   ngOnInit(): void {
-    this.all();
+    this.allHolders();
   }
 
   all(): void {
-    this.movementService.all()
+    this.movementService.all(this.holder)
     .subscribe(
     data => {
       this.movements = data;
     },
     error => console.log(error)
+    )
+  }
+
+  allHolders(): void {
+    this.holderService.all()
+    .subscribe(
+      data => this.holders = data,
+      error => console.log(error)
     )
   }
 }

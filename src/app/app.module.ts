@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,20 +13,26 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { HolderComponent } from './components/holder/holder.component';
+
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
     MovementListComponent,
-    MovementNewComponent
+    MovementNewComponent,
+    HolderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    CurrencyMaskModule
   ],
   providers: [
     {
